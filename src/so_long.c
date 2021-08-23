@@ -19,7 +19,7 @@ void	argument_checker(int argc, char **argv)
 		ft_error("Error: too many arguments");
 	if (ft_strrchr(argv[1], '.'))
 	{
-		if (ft_strncmp(ft_strrchr(argv[1], '.'), ".ber", 4) != 0)
+		if (ft_strcmp(ft_strrchr(argv[1], '.'), ".ber") != 0)
 			ft_error("Error: incorrect extension");
 	}
 	else
@@ -35,4 +35,5 @@ void	so_long(int argc, char **argv)
 	map_width_counter(argv[1], &mark);
 	map_parser(argv[1], &mark);
 	map_checker(&mark);
+	init_game(&mark);
 }

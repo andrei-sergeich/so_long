@@ -9,6 +9,7 @@
 # include "limits.h"
 # include "../libft/libft.h"
 # include "../mlx/mlx.h"
+//# include <mlx.h>
 
 typedef struct s_markers
 {
@@ -21,10 +22,23 @@ typedef struct s_markers
 	int		border;
 	int		ground;
 	int		death;
+	void	*mlx;
+	void	*win;
+	int		img_hei;
+	int		img_wid;
+	int		steps;
+	int		grades;
+	void	*img_hero;
+	void	*img_ground;
+	void	*img_wall;
+	void	*img_weapon;
+	void	*img_helic_c;
+	void	*img_helic_o;
 }	t_markers;
 
 int		main(int argc, char **argv);
 void	so_long(int argc, char **argv);
+
 void	argument_checker(int argc, char **argv);
 void	init_markers(t_markers *mark);
 void	map_width_counter(char *map, t_markers *mark);
@@ -32,5 +46,12 @@ void	map_parser(char *map, t_markers *mark);
 void	map_checker(t_markers *mark);
 void	top_and_bottom_of_map(t_markers *mark);
 void	body_of_map(char *line, t_markers *mark);
+
+void	init_game(t_markers *mark);
+void	map_filling(t_markers *mark);
+void	init_image(t_markers *mark);
+char	*check_image(char *path);
+int		lets_play(int keycode, t_markers *mark);
+int		ft_close_x(t_markers *mark);
 
 #endif

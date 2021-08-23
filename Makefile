@@ -15,22 +15,22 @@ INC			=	-I./include -I./libft -I./mlx
 
 CC			=	gcc
 CFLAGS		=	-Wall -Wextra -Werror
-MLX_FLAGS	=	-Lmlx -lmlx -framework OpenGL -framework AppKit
+MLX_FLAGS	=	-lmlx -framework OpenGL -framework AppKit
 RM			=	rm -f
 
 all:		$(NAME)
 
-%.o:		%.c $(HEADER)
+%.o:		%.c $(INC)
 			$(CC) $(CFLAGS) $(INC) -c $< -o $@
 
-$(NAME):	$(OBJS) $(HEADER)
-			@make -C $(LIB_DIR)
+$(NAME):	$(OBJS)
 			@make -C $(MLX_DIR)
-			@$(CC) $(CFLAGS) $(OBJS) $(LIB_DIR)/libft.a $(MLX_DIR)/libmlx.a $(INC) $(MLX_FLAGS) -o $(NAME)
+			@make -C $(LIB_DIR)
+			@$(CC) $(CFLAGS) $(MLX_FLAGS) $(INC) $(LIB_DIR)/libft.a $(OBJS) -o $(NAME)
 
 clean:
+			@make clean -C $(MLX_DIR)
 			@make clean -C $(LIB_DIR)
-#			@make clean -C $(MLX_DIR)
 			$(RM) $(OBJS)
 
 fclean:		clean
