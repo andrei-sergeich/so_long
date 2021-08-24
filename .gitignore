@@ -55,8 +55,7 @@ dkms.conf
 .idea/
 .vscode/
 cmake-build-debug
-tester_100
-#CMakeLists.txt
+CMakeLists.txt
 *.code-workspace
 *.pdf
 .DS_Store

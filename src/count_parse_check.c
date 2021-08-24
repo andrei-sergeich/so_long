@@ -16,6 +16,8 @@ void	map_width_counter(char *map, t_markers *mark)
 		free(line);
 		if (gnl == 0)
 			break ;
+		if (gnl == -1)
+			ft_error("Error: GNL error");
 	}
 	close(fd);
 }
@@ -89,6 +91,8 @@ void	body_of_map(char *map_line, t_markers *mark)
 			mark->border += 1;
 		else if (map_line[it] == '0')
 			mark->ground += 1;
+		else if (map_line[it] == 'D')
+			mark->death += 1;
 		else
 			ft_error("Error: incorrect symbols on the map");
 		it++;

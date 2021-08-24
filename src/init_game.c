@@ -11,32 +11,40 @@ int	lets_play(int keycode, t_markers *mark)
 	return (0);
 }
 
-int	ft_close_x(t_markers *mark)
+void	put_image(char symbol, t_markers *mark, int y, int x)
 {
-	mlx_destroy_window(mark->mlx, mark->win);
-	ft_putendl_fd("You closed window", 1);
-	exit(EXIT_SUCCESS);
-}
-
-char	*check_image(char *path)
-{
-	if (open((path), O_RDONLY) < 0)
-		ft_error("Error: no image file in directory");
-	return (path);
-}
-
-void	init_image(t_markers *mark)
-{
-	mark->img_hei = 64;
-	mark->img_wid = 64;
-	mark->steps = 0;
-	mark->grades = 0;
-	mark->img_hero = check_image("./images/hero.xpm");
-	mark->img_ground = check_image("./images/ground.xpm");
-	mark->img_wall = check_image("./images/wall.xpm");
-	mark->img_weapon = check_image("./images/weapon.xpm");
-	mark->img_helic_c = check_image("./images/helic_c.xpm");
-	mark->img_helic_o = check_image("./images/helic_o.xpm");
+	if (symbol == '1')
+		mark->img = mlx_xpm_file_to_image(mark->mlx, mark->img_border, \
+											&mark->img_hei, &mark->img_wid);
+	if (symbol == '0')
+		mark->img = mlx_xpm_file_to_image(mark->mlx, mark->img_ground, \
+											&mark->img_hei, &mark->img_wid);
+	if (symbol == 'C')
+		mark->img = mlx_xpm_file_to_image(mark->mlx, mark->img_weapon, \
+											&mark->img_hei, &mark->img_wid);
+	if (symbol == 'E')
+	{
+		mark->exit_x = x;
+		mark->exit_y = y;
+		mark->img = mlx_xpm_file_to_image(mark->mlx, mark->img_helic_c, \
+											&mark->img_hei, &mark->img_wid);
+	}
+	if (symbol == 'P')
+	{
+		mark->pos_x = x;
+		mark->pos_y = y;
+		mark->img = mlx_xpm_file_to_image(mark->mlx, mark->img_hero, \
+											&mark->img_hei, &mark->img_wid);
+	}
+	if (symbol == 'D')
+	{
+//		mark->death_x = x;
+//		mark->death_y = y;
+		mark->img = mlx_xpm_file_to_image(mark->mlx, mark->img_death, \
+											&mark->img_hei, &mark->img_wid);
+	}
+	mlx_put_image_to_window(mark->mlx, mark->win, mark->img, \
+							x * mark->img_hei, y * mark->img_wid);
 }
 
 void	map_filling(t_markers *mark)
@@ -51,7 +59,7 @@ void	map_filling(t_markers *mark)
 		l = 0;
 		while (mark->map[w][l])
 		{
-//			put_image();
+			put_image(mark->map[w][l], mark, w, l);
 			l++;
 		}
 		w++;
@@ -60,6 +68,7 @@ void	map_filling(t_markers *mark)
 
 void	init_game(t_markers *mark)
 {
+//	printf("%d\n", mark->collect);
 	mark->mlx = mlx_init();
 	mark->win = mlx_new_window(mark->mlx, mark->map_len * 64, \
 						mark->map_wid * 64, "So Long!");

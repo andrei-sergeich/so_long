@@ -24,16 +24,24 @@ typedef struct s_markers
 	int		death;
 	void	*mlx;
 	void	*win;
+	void	*img;
 	int		img_hei;
 	int		img_wid;
 	int		steps;
 	int		grades;
 	void	*img_hero;
 	void	*img_ground;
-	void	*img_wall;
+	void	*img_border;
 	void	*img_weapon;
 	void	*img_helic_c;
 	void	*img_helic_o;
+	void	*img_death;
+	int		pos_x;
+	int		pos_y;
+	int		death_x;
+	int		death_y;
+	int		exit_x;
+	int		exit_y;
 }	t_markers;
 
 int		main(int argc, char **argv);
@@ -51,6 +59,8 @@ void	init_game(t_markers *mark);
 void	map_filling(t_markers *mark);
 void	init_image(t_markers *mark);
 char	*check_image(char *path);
+void	put_image(char symbol, t_markers *mark, int y, int x);
+
 int		lets_play(int keycode, t_markers *mark);
 int		ft_close_x(t_markers *mark);
 
