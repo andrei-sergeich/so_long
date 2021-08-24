@@ -3,22 +3,21 @@
 void	map_width_counter(char *map, t_markers *mark)
 {
 	int		fd;
-	int		gnl;
+	int		count;
 	char	*line;
 
 	fd = open(map, O_RDONLY);
 	if (fd < 0)
 		ft_error("Error: no such file in directory");
-	while (1)
+	count = 1;
+	while (count == 1)
 	{
-		gnl = get_next_line(fd, &line);
-		mark->map_wid += 1;
+		count = get_next_line(fd, &line);
 		free(line);
-		if (gnl == 0)
-			break ;
-		if (gnl == -1)
-			ft_error("Error: GNL error");
+		mark->map_wid += 1;
 	}
+	if (count == -1)
+		ft_error("Error: GNL error");
 	close(fd);
 }
 
@@ -26,6 +25,7 @@ void	map_parser(char *map, t_markers *mark)
 {
 	int		it;
 	int		fd;
+	int		count;
 	char	*line;
 
 	it = 0;
@@ -33,18 +33,16 @@ void	map_parser(char *map, t_markers *mark)
 	if (fd < 0)
 		ft_error("Error: no such file in directory");
 	mark->map = ft_calloc(mark->map_wid + 1, sizeof(char *));
-	while (1)
+	count = 1;
+	while (count == 1)
 	{
-		if (get_next_line(fd, &line) == 0)
-		{
-			mark->map[it] = ft_strdup(line);
-			free(line);
-			break ;
-		}
+		count = get_next_line(fd, &line);
 		mark->map[it] = ft_strdup(line);
 		free(line);
 		it++;
 	}
+	if (count == -1)
+		ft_error("Error: GNL error");
 	close(fd);
 }
 

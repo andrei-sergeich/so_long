@@ -57,11 +57,15 @@ void	body_of_map(char *line, t_markers *mark);
 
 void	init_game(t_markers *mark);
 void	map_filling(t_markers *mark);
-void	init_image(t_markers *mark);
-char	*check_image(char *path);
 void	put_image(char symbol, t_markers *mark, int y, int x);
 
-int		lets_play(int keycode, t_markers *mark);
+int		lets_push(int keycode, t_markers *mark);
+void	lets_play(int keycode, t_markers *mark);
+void	lets_move(t_markers *mark, int x, int y);
+
+int		ft_close(t_markers *mark, char message_code);
 int		ft_close_x(t_markers *mark);
+char	*check_image(char *path);
+void	init_image(t_markers *mark);
 
 #endif
