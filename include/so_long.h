@@ -62,10 +62,13 @@ void	put_image(char symbol, t_markers *mark, int y, int x);
 int		lets_push(int keycode, t_markers *mark);
 void	lets_play(int keycode, t_markers *mark);
 void	lets_move(t_markers *mark, int x, int y);
+void	moving(t_markers *mark, int x, int y);
+void	evacuation(t_markers *mark);
 
 int		ft_close(t_markers *mark, char message_code);
 int		ft_close_x(t_markers *mark);
 char	*check_image(char *path);
 void	init_image(t_markers *mark);
+void	step_printer(t_markers *mark);
 
 #endif

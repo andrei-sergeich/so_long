@@ -7,10 +7,10 @@ int	ft_close(t_markers *mark, char message_code)
 		ft_putendl_fd("You closed window", 1);
 	else if (message_code == 'W')
 		ft_putendl_fd("YOU WIN", 1);
-	else if (message_code == 'L')
-		ft_putendl_fd("YOU LOOSE", 1);
+//	else if (message_code == 'L')
+//		ft_putendl_fd("YOU LOOSE", 1);
 	else if (message_code == 'D')
-		ft_putendl_fd("you were killed by an enemy patrol", 1);
+		ft_putendl_fd("YOU WERE KILLED BY AN ENEMY PATROL", 1);
 	exit(EXIT_SUCCESS);
 }
 
@@ -30,11 +30,10 @@ char	*check_image(char *path)
 
 void	init_image(t_markers *mark)
 {
-//	mark->grades = 0;
 	mark->img_hei = 64;
 	mark->img_wid = 64;
 	mark->steps = 0;
-	mark->img_hero = check_image("./images/hero_an.xpm");
+	mark->img_hero = check_image("./images/hero.xpm");
 	mark->img_ground = check_image("./images/ground.xpm");
 	mark->img_border = check_image("./images/border.xpm");
 	mark->img_weapon = check_image("./images/machine_gun.xpm");

@@ -5,7 +5,6 @@ void	map_width_counter(char *map, t_markers *mark)
 	int		fd;
 	int		count;
 	char	*line;
-
 	fd = open(map, O_RDONLY);
 	if (fd < 0)
 		ft_error("Error: no such file in directory");
@@ -109,7 +108,7 @@ void	map_checker(t_markers *mark)
 		body_of_map(mark->map[it], mark);
 		it++;
 	}
-	if (mark->exit != 1 || mark->collect == 0 || mark->pos != 1)
+	if (mark->exit == 0 || mark->collect == 0 || mark->pos != 1)
 		ft_error("Error: incorrect count of required elements on the map");
 	if (mark->map_wid > 17 || mark->map_len > 39)
 		ft_error("Error: decrease map parameters");

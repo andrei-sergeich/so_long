@@ -2,12 +2,8 @@ NAME		=	so_long
 
 SRCS_FILES	= 	${shell find ./src -name "*.c"}
 
-# UTILS_FILES	= 	${shell find ./Utils -name "*.c"}
-
-SRCS				= 	$(SRCS_FILES)
-OBJS				=	$(patsubst %.c,%.o,$(SRCS))
-# SRCS_UTILS_FILES	=	$(UTILS_FILES)
-# OBJS_UTILS			=	$(patsubst %.c,%.o,$(SRCS_UTILS_FILES))
+SRCS		= 	$(SRCS_FILES)
+OBJS		=	$(patsubst %.c,%.o,$(SRCS))
 
 LIB_DIR		=	libft
 MLX_DIR		=	mlx
@@ -27,6 +23,8 @@ $(NAME):	$(OBJS)
 			@make -C $(MLX_DIR)
 			@make -C $(LIB_DIR)
 			@$(CC) $(CFLAGS) $(MLX_FLAGS) $(INC) $(LIB_DIR)/libft.a $(OBJS) -o $(NAME)
+			@clear
+			@echo "Let's play, my Master!!!"
 
 clean:
 			@make clean -C $(MLX_DIR)
