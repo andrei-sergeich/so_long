@@ -62,6 +62,8 @@ CMakeLists.txt
 .DS_Store?
 so_long
 *.py
+*.swiftdoc
+*.swiftmodule
 # .out
 # .out?
 # .o

@@ -10,13 +10,13 @@ MLX_DIR		=	mlx
 INC			=	-I./include -I./libft -I./mlx
 
 CC			=	gcc
-CFLAGS		=	-Wall -Wextra -Werror
+CFLAGS		=	-Wall -Wextra -Werror -g
 MLX_FLAGS	=	-lmlx -framework OpenGL -framework AppKit
 RM			=	rm -f
 
 all:		$(NAME)
 
-%.o:		%.c $(INC)
+%.o:		%.c ./include/so_long.h
 			$(CC) $(CFLAGS) $(INC) -c $< -o $@
 
 $(NAME):	$(OBJS)

@@ -1,39 +1,54 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   so_long.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: cmero <marvin@42.fr>                       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/08/26 13:47:59 by cmero             #+#    #+#             */
+/*   Updated: 2021/08/26 16:36:40 by cmero            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../include/so_long.h"
 
-void	init_markers(t_markers	*mark)
+void	map_filling(t_markers *mark)
 {
-	mark->map_len = 0;
-	mark->map_wid = 0;
-	mark->exit = 0;
-	mark->collect = 0;
-	mark->pos = 0;
-	mark->border = 0;
-	mark->ground = 0;
-}
+	int	w;
+	int	l;
 
-void	argument_checker(int argc, char **argv)
-{
-	if (argc == 1)
-		ft_error("Error: no map");
-	if (argc > 2)
-		ft_error("Error: too many arguments");
-	if (ft_strrchr(argv[1], '.'))
+	w = 0;
+	while (mark->map[w])
 	{
-		if (ft_strcmp(ft_strrchr(argv[1], '.'), ".ber") != 0)
-			ft_error("Error: incorrect extension");
+		l = 0;
+		while (mark->map[w][l])
+		{
+			put_image(mark->map[w][l], mark, w, l);
+			l++;
+		}
+		w++;
 	}
-	else
-		ft_error("Error: incorrect extension");
 }
 
-void	so_long(int argc, char **argv)
+void	init_game(t_markers *mark)
+{
+	mark->mlx = mlx_init();
+	mark->win = mlx_new_window(mark->mlx, mark->map_len * 64, \
+								mark->map_wid * 64, "So Long!");
+	map_filling(mark);
+	mlx_hook(mark->win, 2, 0, lets_push, mark);
+	mlx_hook(mark->win, 17, 1L << 2, ft_close_x, mark);
+	mlx_loop_hook(mark->mlx, patrol_animation, mark);
+	mlx_loop(mark->mlx);
+}
+
+void	so_long(char *map)
 {
 	t_markers	mark;
 
-	argument_checker(argc, argv);
 	init_markers(&mark);
-	map_width_counter(argv[1], &mark);
-	map_parser(argv[1], &mark);
+	map_width_counter(map, &mark);
+	map_parser(map, &mark);
 	map_checker(&mark);
 	init_game(&mark);
 }

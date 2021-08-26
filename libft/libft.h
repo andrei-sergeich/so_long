@@ -82,6 +82,7 @@ char	**ft_split(char const *s, char c);
 char	*ft_strmapi(char const *s, char (*f)(unsigned int, char));
 char	*ft_strcpy(char *dst, const char *src);
 void	ft_strclr(char *s);
+int		get_next_line(int fd, char **line);
 
 /*
 **		puts
@@ -113,6 +114,5 @@ int		ft_lstfindmax_val(t_list *lst);
 int		ft_lstfindmin_val(t_list *lst);
 int		ft_lstfind_ind_of_max_value(t_list *lst);
 int		ft_lstfind_ind_of_min_value(t_list *lst);
-int		get_next_line(int fd, char **line);
 
 #endif

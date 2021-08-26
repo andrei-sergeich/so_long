@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   count_parse_check.c                                :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: cmero <marvin@42.fr>                       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/08/26 13:47:27 by cmero             #+#    #+#             */
+/*   Updated: 2021/08/26 13:47:39 by cmero            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../include/so_long.h"
 
 void	map_width_counter(char *map, t_markers *mark)
@@ -5,6 +17,7 @@ void	map_width_counter(char *map, t_markers *mark)
 	int		fd;
 	int		count;
 	char	*line;
+
 	fd = open(map, O_RDONLY);
 	if (fd < 0)
 		ft_error("Error: no such file in directory");
@@ -84,12 +97,9 @@ void	body_of_map(char *map_line, t_markers *mark)
 			mark->collect += 1;
 		else if (map_line[it] == 'P')
 			mark->pos += 1;
-		else if (map_line[it] == '1')
-			mark->border += 1;
-		else if (map_line[it] == '0')
-			mark->ground += 1;
-		else if (map_line[it] == 'D')
-			mark->death += 1;
+		else if (map_line[it] == '1' || map_line[it] == '0' \
+				|| map_line[it] == 'D')
+			;
 		else
 			ft_error("Error: incorrect symbols on the map");
 		it++;
